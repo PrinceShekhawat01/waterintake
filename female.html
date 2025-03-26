@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Gender</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+        .option {
+            text-align: center;
+            cursor: pointer;
+        }
+        .option img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #ccc;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .option:hover img {
+            transform: scale(1.1);
+            border-color: blue;
+        }
+        .option p {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .reminder {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        input, select, button {
+            padding: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Select Your Gender</h2>
+    <div class="container">
+        <div class="option" onclick="selectGender('Male')">
+            <img src="male.png" alt="Male">
+            <p>Male</p>
+        </div>
+        <div class="option" onclick="selectGender('Female')">
+            <img src="male.png" alt="Female">
+            <p>Female</p>
+        </div>
+    </div>
+
+    <div class="reminder">
+        <input type="number" placeholder="Enter time" id="timeInput">
+        <select id="timeUnit">
+            <option value="minutes">Minutes</option>
+            <option value="hours">Hours</option>
+        </select>
+        <button onclick="setReminder() ">Set</button>
+    </div>
+
+    <script>
+        function selectGender(gender) {
+            alert("You selected: " + gender);
+        }
+
+        function setReminder() {
+            let time = document.getElementById("timeInput").value;
+            let unit = document.getElementById("timeUnit").value;
+
+            if (time === "") {
+                alert("Please enter a time.");
+                return;
+            }
+
+            alert("Reminder set for " + time + " " + unit + ".");
+            let timeperiod=document.getElementById("timeInput").value;
+            window.location.href=`index.html?time=${timeperiod}`;
+        }
+    </script>
+
+</body>
+</html>

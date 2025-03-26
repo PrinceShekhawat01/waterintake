@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="notifyBtn">Send</button>
+    <script>
+        // ✅ Check if Notifications are supported
+        if ("Notification" in window) {
+            console.log("🎉 Notifications are supported!");
+        } else {
+            console.warn("❗️ Notifications are NOT supported in this browser.");
+        }
+
+        // ✅ Declare perm using let to allow reassignment
+        let perm = "";
+
+        // ✅ Request Notification Permission when page loads
+        document.addEventListener("DOMContentLoaded", () => {
+            Notification.requestPermission().then((permission) => {
+                if (permission === "granted") {
+                    console.log("✅ Notification permission granted!");
+                    perm = "granted"; // Update perm correctly
+                } else if (permission === "denied") {
+                    console.warn("❗️ Notification permission denied!");
+                } else {
+                    console.log("🔔 Permission not yet granted. User needs to allow notifications.");
+                }
+            });
+        });
+
+        // ✅ Get the button and add click event
+        const notifyBtn = document.getElementById("notifyBtn");
+
+        notifyBtn.addEventListener("click", () => {
+            // ✅ Check if permission is granted correctly
+            if (perm === "granted") {
+                // ✅ Create a new notification
+                new Notification("Hi 👋", {
+                    body: "This is your first notification! 🎉"
+                });
+            } else if (perm === "denied") {
+                // ❗️ Show alert if notifications are blocked
+                alert("❗️ Notifications are blocked. Please enable them in browser settings.");
+            } else {
+                // ℹ️ Ask for permission again if needed
+                alert("ℹ️ Please allow notifications to receive alerts.");
+            }
+        });
+    </script>
+</body>
+</html>
